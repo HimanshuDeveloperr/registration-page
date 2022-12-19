@@ -27,3 +27,17 @@ function getpost(){
 }
 
 getpost()
+
+//function to create a new post and push it into the posts array
+
+function createpost(newpost,callback) {
+
+    setTimeout(() => {
+        post.push({...newpost,createdpost:new Date().getTime()})
+            callback()
+        
+    }, 6000);
+    
+}
+
+createpost({name:'nandani',work:'model'},getpost)
