@@ -7,8 +7,13 @@ const post=[
 ]
 
 //function to show post on our webpage
-
+let intervalId=0;
 function getpost(){
+
+    clearInterval(intervalId)
+
+intervalId=setInterval(() => {
+
 
     setTimeout(() => {
 
@@ -24,6 +29,8 @@ function getpost(){
      
         
     }, 2000);
+    
+}, 1000);
 }
 
 getpost()
