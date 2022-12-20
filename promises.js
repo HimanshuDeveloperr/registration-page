@@ -1,36 +1,37 @@
 //creating a post
 
-const post=[
-    {name:'himanshu',work:'frontend-developer',createdpost:new Date().getTime()},
-    {name:'suman',work:'professional footballer',createdpost:new Date().getTime()}
+const post = [
+    { name: 'himanshu', work: 'frontend-developer', createdpost: new Date().getTime() },
+    { name: 'suman', work: 'professional footballer', createdpost: new Date().getTime() }
 
 ]
 
 //function to show post on our webpage
-let intervalId=0;
-function getpost(){
+let intervalId = 0;
+function getpost() {
 
     clearInterval(intervalId)
 
-intervalId=setInterval(() => {
+    intervalId = setInterval(() => {
 
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-       
 
-            let output="";
-            post.forEach((obj)=>{
-              let li=`<li>${obj.name} ${obj.work} updated on ${(new Date().getTime()-obj.createdpost)/1000} seconds ago`
-                output=output+ li
+
+            let output = "";
+            post.forEach((obj) => {
+                let li = `<li>${obj.name} ${obj.work} updated on ${(new Date().getTime() - obj.createdpost) / 1000} seconds ago`
+                output = output + li
             })
-            document.body.innerHTML=output;
+            document.body.innerHTML = output;
             
-     
-        
-    }, 2000);
-    
-}, 1000);
+
+
+
+        }, 2000);
+
+    }, 1000);
 }
 
 getpost()
@@ -39,68 +40,96 @@ getpost()
 
 function createpost(newpost) {
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            post.push({...newpost,createdpost:new Date().getTime()})
-                
-            const error=false;
+            post.push({ ...newpost, createdpost: new Date().getTime() })
 
-            if(!error){
+            const error = false;
+
+            if (!error) {
                 resolve()
             }
-            else{
+            else {
                 reject('Error: something went wrong')
             }
-            
+
         }, 6000);
-        
+
 
     })
 }
 
 
 
-function deletePost(){
-    
-    return new Promise((resolve,reject)=>{
-        
-        
-        setTimeout(() => {
-            
-            
-            if(post.length>0){
+function deletePost() {
 
-                const lastelement= post.pop()
-                
+    return new Promise((resolve, reject) => {
+
+
+        setTimeout(() => {
+
+
+            if (post.length > 0) {
+
+                const lastelement = post.pop()
+
                 resolve(lastelement)
             }
-            else{
+            else {
                 reject('Error: array is empty')
             }
-            
+
         }, 1000);
     })
 }
 
 
 
-createpost({name:'nandani',work:'model'})
-.then(()=>{
-    getpost()
-    deletePost().then(()=>{
+createpost({ name: 'nandani', work: 'model' })
+    .then(() => {
         getpost()
-        deletePost().then(()=>{
+        deletePost().then(() => {
             getpost()
-            deletePost().then(()=>{
+            deletePost().then(() => {
                 getpost()
-                deletePost().then(()=>{})
-                .catch((err)=>{
-                    console.log(err)
+                deletePost().then(() => {
+                    getpost()
+                    deletePost().then(() => { })
+                        .catch((err) => {
+                            console.log(err)
+                        })
                 })
+
             })
-            
         })
-    })})
+    }).catch((err)=>{
+        console.log(err)
+    })
 
 //promises are meant to be broken so use catch whenever u use the promise.
+
+
+
+const updateLastUserActivityTime= new Promise((resolve,reject)=>{
+    setTimeout(() => {
+
+        let time;
+        post.forEach((obj) => {
+
+        //    console.log( time=`${obj.createdpost}`)
+
+        //    console.log(`updated time-${new Date().getTime}`)
+        obj.lastactivity=new Date().getTime()
+        resolve(obj.lastactivity)
+            
+        });
+        
+    }, 1000);
+})
+
+
+
+    Promise.all([createpost,updateLastUserActivityTime]).then((val1,val2)=>{
+        console.log(val1,val2)
+    })
 

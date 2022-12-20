@@ -7,3 +7,9 @@ so to make our js asyn callbacks are used where it takes the function to other p
 
 
 promise take a call back function and  two parameters in it resolve and reject  if everything is fine we will invoke the resolve and if something goes wrong we will invoke reject
+
+what is .then take in as an argument?
+it takes in a function referrence
+
+async and await ?
+if we want afunction to await for we had to label it as async to use await inside the function
