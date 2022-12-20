@@ -13,3 +13,6 @@ it takes in a function referrence
 
 async and await ?
 if we want afunction to await for we had to label it as async to use await inside the function
+
+
+promises are asynchronous

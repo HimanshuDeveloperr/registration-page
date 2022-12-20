@@ -38,9 +38,9 @@ getpost()
 
 //function to create a new post and push it into the posts array
 
-function createpost(newpost) {
+ async function createpost(newpost) {
 
-    return new Promise((resolve, reject) => {
+    var create =await new Promise((resolve, reject) => {
         setTimeout(() => {
             post.push({ ...newpost, createdpost: new Date().getTime() })
 
@@ -57,13 +57,14 @@ function createpost(newpost) {
 
 
     })
+    return create
 }
 
 
 
-function deletePost() {
+async function deletePost() {
 
-    return new Promise((resolve, reject) => {
+    var d = await new Promise((resolve, reject) => {
 
 
         setTimeout(() => {
@@ -81,6 +82,7 @@ function deletePost() {
 
         }, 1000);
     })
+    return d;
 }
 
 
@@ -132,4 +134,5 @@ const updateLastUserActivityTime= new Promise((resolve,reject)=>{
     Promise.all([createpost,updateLastUserActivityTime]).then((val1,val2)=>{
         console.log(val1,val2)
     })
+
 
